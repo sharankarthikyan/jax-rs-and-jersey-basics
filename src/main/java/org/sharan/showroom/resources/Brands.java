@@ -9,6 +9,13 @@ public class Brands {
 	@Path("/getBrands")
 	@Produces(MediaType.TEXT_PLAIN)
 	public String getBrands() {
-		return "list of strings";
+		return "List of strings";
+	}
+	
+	@POST
+	@Path("/setBrand")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String setBrand() {
+		return "Add a new Brand";
 	}
 }
