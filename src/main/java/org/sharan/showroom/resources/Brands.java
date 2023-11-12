@@ -15,7 +15,21 @@ public class Brands {
 	@POST
 	@Path("/brands")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String setBrand() {
+	public String postBrand() {
 		return "Add a new Brand";
+	}
+	
+	@PUT
+	@Path("/brands/{brandId}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String putBrand(@PathParam("brandId") int brandId) {
+		return "Update brand info with ID: " + brandId;
+	}
+	
+	@DELETE
+	@Path("/brands/{brandId}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String deleteBrand(@PathParam("brandId") int brandId) {
+		return "Delete brand from db with ID: " + brandId;
 	}
 }
