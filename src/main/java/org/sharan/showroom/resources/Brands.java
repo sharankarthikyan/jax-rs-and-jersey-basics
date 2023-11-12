@@ -1,5 +1,10 @@
 package org.sharan.showroom.resources;
 
+import java.util.*;
+
+import org.sharan.showroom.hibernate.entities.BrandEntity;
+import org.sharan.showroom.services.BrandService;
+
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
 
@@ -8,28 +13,30 @@ public class Brands {
 	@GET
 	@Path("/brands")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String getBrands() {
-		return "List of strings";
+	public List<Brands> getBrands() {
+		List<Brands> list = new BrandService().getBrands();
+		return list;
 	}
 	
 	@POST
 	@Path("/brands")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String postBrand() {
-		return "Add a new Brand";
+	@Consumes(MediaType.TEXT_PLAIN)
+	public void postBrand(BrandEntity brand) {
+		new BrandService().addBrand(brand);
 	}
 	
 	@PUT
 	@Path("/brands/{brandId}")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String putBrand(@PathParam("brandId") int brandId) {
-		return "Update brand info with ID: " + brandId;
+	@Consumes(MediaType.TEXT_PLAIN)
+	public void putBrand(@PathParam("brandId") int brandId, BrandEntity updatedBrand) {
+		updatedBrand.setBrandId(brandId);
+		new BrandService().updateBrand(updatedBrand);
 	}
 	
 	@DELETE
 	@Path("/brands/{brandId}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String deleteBrand(@PathParam("brandId") int brandId) {
-		return "Delete brand from db with ID: " + brandId;
+	public void deleteBrand(@PathParam("brandId") int brandId) {
+		new BrandService().deleteBrand(brandId);
 	}
 }
