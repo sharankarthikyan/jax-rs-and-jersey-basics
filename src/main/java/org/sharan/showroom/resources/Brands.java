@@ -10,11 +10,14 @@ import jakarta.ws.rs.core.*;
 
 @Path("/showroom")
 public class Brands {
+	
+	BrandService service = new BrandService();
+	
 	@GET
 	@Path("/brands")
 	@Produces(MediaType.TEXT_PLAIN)
-	public List<Brands> getBrands() {
-		List<Brands> list = new BrandService().getBrands();
+	public List<BrandEntity> getBrands() {
+		List<BrandEntity> list = service.getBrands();
 		return list;
 	}
 	
@@ -22,7 +25,7 @@ public class Brands {
 	@Path("/brands")
 	@Consumes(MediaType.TEXT_PLAIN)
 	public void postBrand(BrandEntity brand) {
-		new BrandService().addBrand(brand);
+		service.addBrand(brand);
 	}
 	
 	@PUT
@@ -30,13 +33,13 @@ public class Brands {
 	@Consumes(MediaType.TEXT_PLAIN)
 	public void putBrand(@PathParam("brandId") int brandId, BrandEntity updatedBrand) {
 		updatedBrand.setBrandId(brandId);
-		new BrandService().updateBrand(updatedBrand);
+		service.updateBrand(updatedBrand);
 	}
 	
 	@DELETE
 	@Path("/brands/{brandId}")
 	@Produces(MediaType.TEXT_PLAIN)
 	public void deleteBrand(@PathParam("brandId") int brandId) {
-		new BrandService().deleteBrand(brandId);
+		service.deleteBrand(brandId);
 	}
 }
