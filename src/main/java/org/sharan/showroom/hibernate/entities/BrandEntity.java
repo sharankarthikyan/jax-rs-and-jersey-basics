@@ -1,9 +1,19 @@
 package org.sharan.showroom.hibernate.entities;
 
+import jakarta.persistence.*;
+
+// This replicates the table schema of Brand
+@Entity(name = "brand")
+@Table(name = "brand")
 public class BrandEntity {
-	int brandId;
-	String brandName;
 	
+	@Id
+	@Column(name = "brandId")
+	int brandId;
+	
+	@Column(name = "brandName")
+	String brandName;
+
 	public BrandEntity() {
 		
 	}

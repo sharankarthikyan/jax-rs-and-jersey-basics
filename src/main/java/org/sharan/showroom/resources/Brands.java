@@ -8,6 +8,8 @@ import org.sharan.showroom.services.BrandService;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
 
+
+// 1. This is REST API layer.
 @Path("/showroom")
 public class Brands {
 	
@@ -15,7 +17,7 @@ public class Brands {
 	
 	@GET
 	@Path("/brands")
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.APPLICATION_JSON)
 	public List<BrandEntity> getBrands() {
 		List<BrandEntity> list = service.getBrands();
 		return list;
@@ -23,14 +25,14 @@ public class Brands {
 	
 	@POST
 	@Path("/brands")
-	@Consumes(MediaType.TEXT_PLAIN)
+	@Consumes(MediaType.APPLICATION_JSON)
 	public void postBrand(BrandEntity brand) {
 		service.addBrand(brand);
 	}
 	
 	@PUT
 	@Path("/brands/{brandId}")
-	@Consumes(MediaType.TEXT_PLAIN)
+	@Consumes(MediaType.APPLICATION_JSON)
 	public void putBrand(@PathParam("brandId") int brandId, BrandEntity updatedBrand) {
 		updatedBrand.setBrandId(brandId);
 		service.updateBrand(updatedBrand);
@@ -38,7 +40,6 @@ public class Brands {
 	
 	@DELETE
 	@Path("/brands/{brandId}")
-	@Produces(MediaType.TEXT_PLAIN)
 	public void deleteBrand(@PathParam("brandId") int brandId) {
 		service.deleteBrand(brandId);
 	}
