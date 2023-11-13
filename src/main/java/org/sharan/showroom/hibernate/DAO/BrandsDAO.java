@@ -5,19 +5,25 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 import org.sharan.showroom.hibernate.entities.BrandEntity;
 
 
 // This is DAO layer. This will communicate with DB.
 public class BrandsDAO {
 	
-	SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(BrandEntity.class).buildSessionFactory();
+	SessionFactory factory = new Configuration()
+			.configure("hibernate.cfg.xml")
+			.addAnnotatedClass(BrandEntity.class)
+			.buildSessionFactory();
 
 	public List<BrandEntity> getBrands() {
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
-		List<BrandEntity> list = session.createQuery("from brand").getResultList();
-		return list;
+		String hql = "from brand";
+		Query<BrandEntity> query = session.createQuery("from brand", BrandEntity.class);
+		List<BrandEntity> brandList = query.getResultList();
+		return brandList;
 	}
 
 	public void addBrand(BrandEntity brand) {
@@ -40,7 +46,7 @@ public class BrandsDAO {
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
 		BrandEntity brand = session.get(BrandEntity.class, brandId);
-		session.delete(brand);
+		session.remove(brand);
 		session.getTransaction().commit();
 	}
 
