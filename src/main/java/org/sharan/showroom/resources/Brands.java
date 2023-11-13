@@ -16,7 +16,6 @@ public class Brands {
 	BrandService brandService = new BrandService();
 	
 	@GET
-	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<BrandEntity> getBrands() {
 		List<BrandEntity> list = brandService.getBrands();
@@ -24,7 +23,6 @@ public class Brands {
 	}
 	
 	@POST
-	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void postBrand(BrandEntity brand) {
 		brandService.addBrand(brand);
