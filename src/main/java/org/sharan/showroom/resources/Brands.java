@@ -43,4 +43,9 @@ public class Brands {
 	public void deleteBrand(@PathParam("brandId") int brandId) {
 		brandService.deleteBrand(brandId);
 	}
+	
+	@Path("/{brandId}/products")
+	public Products productsDelegration() {
+		return new Products();
+	}
 }
