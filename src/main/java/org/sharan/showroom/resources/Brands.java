@@ -2,8 +2,8 @@ package org.sharan.showroom.resources;
 
 import java.util.*;
 
-import org.sharan.showroom.hibernate.entities.BrandEntity;
-import org.sharan.showroom.services.BrandService;
+import org.sharan.showroom.hibernate.entities.*;
+import org.sharan.showroom.services.*;
 
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
@@ -13,13 +13,14 @@ import jakarta.ws.rs.core.*;
 @Path("/showroom/brands")
 public class Brands {
 	
-	BrandService service = new BrandService();
+	BrandService brandService = new BrandService();
+	ProductService productService = new ProductService();
 	
 	@GET
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<BrandEntity> getBrands() {
-		List<BrandEntity> list = service.getBrands();
+		List<BrandEntity> list = brandService.getBrands();
 		return list;
 	}
 	
@@ -27,7 +28,7 @@ public class Brands {
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void postBrand(BrandEntity brand) {
-		service.addBrand(brand);
+		brandService.addBrand(brand);
 	}
 	
 	@PUT
@@ -35,12 +36,20 @@ public class Brands {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void putBrand(@PathParam("brandId") int brandId, BrandEntity updatedBrand) {
 		updatedBrand.setBrandId(brandId);
-		service.updateBrand(updatedBrand);
+		brandService.updateBrand(updatedBrand);
 	}
 	
 	@DELETE
 	@Path("/{brandId}")
 	public void deleteBrand(@PathParam("brandId") int brandId) {
-		service.deleteBrand(brandId);
+		brandService.deleteBrand(brandId);
+	}
+	
+	@GET
+	@Path("/{brandId}/products")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<ProductEntity> getProductsByBrand(@PathParam("brandId") int brandId) {
+		List<ProductEntity> productList = productService.getProductsByBrand(brandId);
+		return productList;
 	}
 }
