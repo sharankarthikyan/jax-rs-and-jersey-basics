@@ -14,7 +14,6 @@ import jakarta.ws.rs.core.*;
 public class Brands {
 	
 	BrandService brandService = new BrandService();
-	ProductService productService = new ProductService();
 	
 	@GET
 	@Path("/")
@@ -43,13 +42,5 @@ public class Brands {
 	@Path("/{brandId}")
 	public void deleteBrand(@PathParam("brandId") int brandId) {
 		brandService.deleteBrand(brandId);
-	}
-	
-	@GET
-	@Path("/{brandId}/products")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<ProductEntity> getProductsByBrand(@PathParam("brandId") int brandId) {
-		List<ProductEntity> productList = productService.getProductsByBrand(brandId);
-		return productList;
 	}
 }
