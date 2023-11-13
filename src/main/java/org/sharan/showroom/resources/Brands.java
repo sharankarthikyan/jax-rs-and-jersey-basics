@@ -10,13 +10,13 @@ import jakarta.ws.rs.core.*;
 
 
 // 1. This is REST API layer.
-@Path("/showroom")
+@Path("/showroom/brands")
 public class Brands {
 	
 	BrandService service = new BrandService();
 	
 	@GET
-	@Path("/brands")
+	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<BrandEntity> getBrands() {
 		List<BrandEntity> list = service.getBrands();
@@ -24,14 +24,14 @@ public class Brands {
 	}
 	
 	@POST
-	@Path("/brands")
+	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void postBrand(BrandEntity brand) {
 		service.addBrand(brand);
 	}
 	
 	@PUT
-	@Path("/brands/{brandId}")
+	@Path("/{brandId}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void putBrand(@PathParam("brandId") int brandId, BrandEntity updatedBrand) {
 		updatedBrand.setBrandId(brandId);
@@ -39,7 +39,7 @@ public class Brands {
 	}
 	
 	@DELETE
-	@Path("/brands/{brandId}")
+	@Path("/{brandId}")
 	public void deleteBrand(@PathParam("brandId") int brandId) {
 		service.deleteBrand(brandId);
 	}
