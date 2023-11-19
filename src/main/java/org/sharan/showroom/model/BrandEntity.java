@@ -1,5 +1,7 @@
 package org.sharan.showroom.model;
 
+import java.util.*;
+
 import jakarta.persistence.*;
 
 // This replicates the table schema of Brand
@@ -16,7 +18,7 @@ public class BrandEntity {
 	private String brandName;
 	
 	@Transient
-	private Link links;
+	private List<Link> links;
 
 	public BrandEntity() {
 		
@@ -43,11 +45,11 @@ public class BrandEntity {
 		this.brandName = brandName;
 	}
 
-	public Link getLinks() {
+	public List<Link> getLinks() {
 		return links;
 	}
 
-	public void setLinks(Link links) {
+	public void setLinks(List<Link> links) {
 		this.links = links;
 	}
 }

@@ -29,8 +29,14 @@ public class BrandsResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public BrandEntity getBrand(@PathParam("brandId") int brandId, @Context UriInfo uri) {
 		BrandEntity brand = brandService.getBrand(brandId);
+		
 		Link link = new Link(uri.getAbsolutePath().toString(), "self");
-		brand.setLinks(link);
+		Link products = new Link(uri.getAbsolutePathBuilder().path("products").toString(), "products");
+		List<Link> links = new ArrayList<Link>();
+		links.add(link);
+		links.add(products);
+		brand.setLinks(links);
+		
 		return brand;
 	}
 	
