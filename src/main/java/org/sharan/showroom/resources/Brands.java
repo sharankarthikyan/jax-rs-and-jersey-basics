@@ -25,10 +25,10 @@ public class Brands {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_HTML)
 	public Response postBrand(BrandEntity brand) {
 		brandService.addBrand(brand);
-		return Response.status(Status.CREATED).build();
+		return Response.status(Status.CREATED).entity("OK").build();
 	}
 	
 	@PUT
