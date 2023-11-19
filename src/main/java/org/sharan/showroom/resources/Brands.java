@@ -1,5 +1,6 @@
 package org.sharan.showroom.resources;
 
+import java.net.URI;
 import java.util.*;
 
 import org.sharan.showroom.hibernate.entities.*;
@@ -25,10 +26,11 @@ public class Brands {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.TEXT_HTML)
-	public Response postBrand(BrandEntity brand) {
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response postBrand(BrandEntity brand, @Context UriInfo uri) {
+		URI location = uri.getAbsolutePath();
 		brandService.addBrand(brand);
-		return Response.status(Status.CREATED).entity("OK").build();
+		return Response.created(location).entity(brand).build();
 	}
 	
 	@PUT

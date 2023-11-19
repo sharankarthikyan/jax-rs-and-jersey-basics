@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 public class BrandEntity {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "brandId")
 	int brandId;
 	
