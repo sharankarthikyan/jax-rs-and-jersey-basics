@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import org.sharan.showroom.hibernate.entities.BrandEntity;
+import org.sharan.showroom.hibernate.entities.ProductEntity;
 
 
 // This is DAO layer. This will communicate with DB.
@@ -48,6 +49,16 @@ public class BrandsDAO {
 		BrandEntity brand = session.get(BrandEntity.class, brandId);
 		session.remove(brand);
 		session.getTransaction().commit();
+	}
+
+	public BrandEntity getBrand(int brandId) {
+		Session session = factory.getCurrentSession();
+		session.beginTransaction();
+        String hql = "from brand b where b.id = :brandId";
+        Query<BrandEntity> query = session.createQuery(hql, BrandEntity.class);
+        query.setParameter("brandId", brandId);
+        BrandEntity brand = query.getSingleResult();
+		return brand;
 	}
 
 }

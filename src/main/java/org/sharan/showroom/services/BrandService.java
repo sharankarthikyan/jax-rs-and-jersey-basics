@@ -27,5 +27,10 @@ public class BrandService {
 	public void deleteBrand(int brandId) {
 		DAO.deleteBrand(brandId);
 	}
+
+	public BrandEntity getBrand(int brandId) {
+		BrandEntity brand =  DAO.getBrand(brandId);
+		return brand;
+	}
 	
 }
