@@ -23,4 +23,15 @@ public class ProductsDAO {
         List<ProductEntity> productList = query.getResultList();
 		return productList;
 	}
+
+	public List<ProductEntity> getProductsByBrandAndCategory(int brandId, String category) {
+		Session session = factory.getCurrentSession();
+		session.beginTransaction();
+        String hql = "from product p where p.brandEntity.id = :brandId and p.category = :category";
+        Query<ProductEntity> query = session.createQuery(hql, ProductEntity.class);
+        query.setParameter("brandId", brandId);
+        query.setParameter("category", category);
+        List<ProductEntity> productList = query.getResultList();
+		return productList;
+	}
 }

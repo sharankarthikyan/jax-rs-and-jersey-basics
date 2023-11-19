@@ -14,8 +14,15 @@ public class Products {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<ProductEntity> getProductsByBrand(@PathParam("brandId") int brandId) {
-		List<ProductEntity> productList = productService.getProductsByBrand(brandId);
-		return productList;
+	public List<ProductEntity> getProductsByBrand(@PathParam("brandId") int brandId,
+			@QueryParam("category") String category) {
+		List<ProductEntity> productList;
+		if("bike".equals(category) || "car".equals(category)) {
+			productList = productService.getProductsByBrandAndCategory(brandId, category);
+			return productList;
+		} else {
+			productList = productService.getProductsByBrand(brandId);
+			return productList;	
+		}
 	}
 }
