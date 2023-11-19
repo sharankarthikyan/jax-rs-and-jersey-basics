@@ -10,10 +10,13 @@ public class BrandEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "brandId")
-	int brandId;
+	private int brandId;
 	
 	@Column(name = "brandName")
-	String brandName;
+	private String brandName;
+	
+	@Transient
+	private Link links;
 
 	public BrandEntity() {
 		
@@ -38,5 +41,13 @@ public class BrandEntity {
 
 	public void setBrandName(String brandName) {
 		this.brandName = brandName;
+	}
+
+	public Link getLinks() {
+		return links;
+	}
+
+	public void setLinks(Link links) {
+		this.links = links;
 	}
 }

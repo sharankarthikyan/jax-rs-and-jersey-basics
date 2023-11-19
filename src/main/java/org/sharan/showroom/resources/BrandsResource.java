@@ -3,7 +3,8 @@ package org.sharan.showroom.resources;
 import java.net.URI;
 import java.util.*;
 
-import org.sharan.showroom.model.BrandEntity;
+import org.sharan.showroom.model.*;
+import org.sharan.showroom.model.Link;
 import org.sharan.showroom.services.*;
 
 import jakarta.ws.rs.*;
@@ -26,8 +27,10 @@ public class BrandsResource {
 	@GET
 	@Path("/{brandId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public BrandEntity getBrand(@PathParam("brandId") int brandId) {
+	public BrandEntity getBrand(@PathParam("brandId") int brandId, @Context UriInfo uri) {
 		BrandEntity brand = brandService.getBrand(brandId);
+		Link link = new Link(uri.getAbsolutePath().toString(), "self");
+		brand.setLinks(link);
 		return brand;
 	}
 	
