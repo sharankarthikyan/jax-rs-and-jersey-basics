@@ -15,14 +15,20 @@ public class Products {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<ProductEntity> getProductsByBrand(@PathParam("brandId") int brandId,
-			@QueryParam("category") String category) {
+			@QueryParam("category") String category, @QueryParam("start") int start,
+			@QueryParam("size") int size) {
+		
 		List<ProductEntity> productList;
 		if("bike".equals(category) || "car".equals(category)) {
 			productList = productService.getProductsByBrandAndCategory(brandId, category);
-			return productList;
 		} else {
 			productList = productService.getProductsByBrand(brandId);
-			return productList;	
 		}
+		
+		if(start >= 0 && size >= 0) {
+			 productList = productList.subList(start, size);
+		}
+		
+		return productList;
 	}
 }
