@@ -7,6 +7,7 @@ import org.sharan.showroom.services.*;
 
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
+import jakarta.ws.rs.core.Response.Status;
 
 
 // 1. This is REST API layer.
@@ -24,8 +25,10 @@ public class Brands {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void postBrand(BrandEntity brand) {
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response postBrand(BrandEntity brand) {
 		brandService.addBrand(brand);
+		return Response.status(Status.CREATED).build();
 	}
 	
 	@PUT
