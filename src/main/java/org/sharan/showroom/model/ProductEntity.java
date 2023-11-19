@@ -1,4 +1,4 @@
-package org.sharan.showroom.hibernate.entities;
+package org.sharan.showroom.model;
 
 import jakarta.persistence.*;
 

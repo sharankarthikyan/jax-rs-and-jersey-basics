@@ -1,11 +1,12 @@
-package org.sharan.showroom.hibernate.DAO;
+package org.sharan.showroom.DAO;
 
 import java.util.List;
 
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
-import org.sharan.showroom.hibernate.entities.*;
+import org.sharan.showroom.model.BrandEntity;
+import org.sharan.showroom.model.ProductEntity;
 
 public class ProductsDAO {
 	SessionFactory factory = new Configuration()

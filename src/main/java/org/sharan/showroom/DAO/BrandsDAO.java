@@ -1,4 +1,4 @@
-package org.sharan.showroom.hibernate.DAO;
+package org.sharan.showroom.DAO;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
-import org.sharan.showroom.hibernate.entities.BrandEntity;
-import org.sharan.showroom.hibernate.entities.ProductEntity;
+import org.sharan.showroom.model.BrandEntity;
+import org.sharan.showroom.model.ProductEntity;
 
 
 // This is DAO layer. This will communicate with DB.

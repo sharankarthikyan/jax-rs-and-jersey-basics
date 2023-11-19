@@ -3,17 +3,16 @@ package org.sharan.showroom.resources;
 import java.net.URI;
 import java.util.*;
 
-import org.sharan.showroom.hibernate.entities.*;
+import org.sharan.showroom.model.BrandEntity;
 import org.sharan.showroom.services.*;
 
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
-import jakarta.ws.rs.core.Response.Status;
 
 
 // 1. This is REST API layer.
 @Path("/showroom/brands")
-public class Brands {
+public class BrandsResource {
 	
 	BrandService brandService = new BrandService();
 	
@@ -36,8 +35,11 @@ public class Brands {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response postBrand(BrandEntity brand, @Context UriInfo uri) {
-		URI location = uri.getAbsolutePath();
 		brandService.addBrand(brand);
+		
+		String resourceURL = uri.getAbsolutePath().toString() + "/" + brand.getBrandId();
+		URI location = URI.create(resourceURL); 
+		
 		return Response.created(location).entity(brand).build();
 	}
 	
@@ -56,7 +58,7 @@ public class Brands {
 	}
 	
 	@Path("/{brandId}/products")
-	public Products productsDelegration() {
-		return new Products();
+	public ProductsResource productsDelegration() {
+		return new ProductsResource();
 	}
 }

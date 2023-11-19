@@ -2,8 +2,8 @@ package org.sharan.showroom.services;
 
 import java.util.List;
 
-import org.sharan.showroom.hibernate.DAO.BrandsDAO;
-import org.sharan.showroom.hibernate.entities.BrandEntity;
+import org.sharan.showroom.DAO.BrandsDAO;
+import org.sharan.showroom.model.BrandEntity;
 
 
 // 2. This is service layer, which used to communicate with DAO layer.

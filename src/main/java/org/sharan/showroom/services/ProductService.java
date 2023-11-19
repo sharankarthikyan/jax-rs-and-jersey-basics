@@ -2,8 +2,8 @@ package org.sharan.showroom.services;
 
 import java.util.List;
 
-import org.sharan.showroom.hibernate.DAO.ProductsDAO;
-import org.sharan.showroom.hibernate.entities.ProductEntity;
+import org.sharan.showroom.DAO.ProductsDAO;
+import org.sharan.showroom.model.ProductEntity;
 
 public class ProductService {
 	ProductsDAO DAO = new ProductsDAO();
